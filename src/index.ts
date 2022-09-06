@@ -7,7 +7,6 @@ export enum LoggerLevel {
 }
 
 export interface LoggerOptions {
-    tag: string;
     level?: LoggerLevel;
 }
 
@@ -18,8 +17,8 @@ export interface LoggerInterface {
     verbose(...message: any[]): void;
 }
 
-export function logger(opts: LoggerOptions): LoggerInterface {
-    const { tag, level = LoggerLevel.error } = opts;
+export function logger(tag, opts: LoggerOptions): LoggerInterface {
+    const { level = LoggerLevel.error } = opts;
     const methods = {};
 
     for (const [name, value] of Object.entries(LoggerLevel)) {
