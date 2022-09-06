@@ -1,6 +1,6 @@
 {
     "name": "@voqse/logger",
-    "version": "1.0.0",
+    "version": "1.0.1-0",
     "description": "Simple console logger.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -22,7 +22,6 @@
         "url": "https://github.com/voqse/node-logger/issues"
     },
     "homepage": "https://github.com/voqse/node-logger#readme",
-
     "devDependencies": {
         "husky": "^8.0.1",
         "prettier": "^2.7.1",
