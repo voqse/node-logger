@@ -1,4 +1,4 @@
-export enum LogLevel {
+export enum LoggerLevel {
     off,
     error,
     info,
@@ -8,7 +8,7 @@ export enum LogLevel {
 
 export interface LoggerOptions {
     tag: string;
-    level?: LogLevel;
+    level?: LoggerLevel;
 }
 
 export interface LoggerInterface {
@@ -19,10 +19,10 @@ export interface LoggerInterface {
 }
 
 export function logger(opts: LoggerOptions): LoggerInterface {
-    const { tag, level = LogLevel.error } = opts;
+    const { tag, level = LoggerLevel.error } = opts;
     const methods = {};
 
-    for (const [name, value] of Object.entries(LogLevel)) {
+    for (const [name, value] of Object.entries(LoggerLevel)) {
         methods[name] = (...message: any[]) => {
             if (!value) return;
 
