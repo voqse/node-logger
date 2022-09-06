@@ -1,0 +1,32 @@
+{
+    "name": "@voqse/logger",
+    "version": "1.0.0",
+    "description": "Simple console logger.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "keywords": [
+        "node",
+        "logger",
+        "api"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/voqse/node-logger.git"
+    },
+    "author": "voqse",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/voqse/node-logger/issues"
+    },
+    "homepage": "https://github.com/voqse/node-logger#readme",
+
+    "devDependencies": {
+        "husky": "^8.0.1",
+        "prettier": "^2.7.1",
+        "typescript": "^4.8.2"
+    }
+}
