@@ -7,7 +7,7 @@ export enum LoggerLevel {
 }
 
 export interface LoggerOptions {
-    level?: LoggerLevel;
+    logLevel?: LoggerLevel;
 }
 
 export interface LoggerInterface {
@@ -18,14 +18,14 @@ export interface LoggerInterface {
 }
 
 export function logger(tag, opts: LoggerOptions): LoggerInterface {
-    const { level = LoggerLevel.error } = opts;
+    const { logLevel = LoggerLevel.error } = opts;
     const methods = {};
 
     for (const [name, value] of Object.entries(LoggerLevel)) {
         methods[name] = (...message: any[]) => {
             if (!value) return;
 
-            if (level >= value) {
+            if (logLevel >= value) {
                 const formattedMessage = [`[${new Date().toUTCString()}]`, `(${tag})`, ...message];
                 console?.[name] ? console[name](...formattedMessage) : console.log(...formattedMessage);
             }
