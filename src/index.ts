@@ -1,13 +1,12 @@
-export enum LoggerLevel {
+export enum LoggerVerbosity {
     off,
-    error,
     info,
     debug,
     verbose,
 }
 
 export interface LoggerOptions {
-    logLevel?: LoggerLevel;
+    verbosity?: number;
 }
 
 export interface LoggerInterface {
@@ -18,16 +17,16 @@ export interface LoggerInterface {
 }
 
 export function logger(tag, opts: LoggerOptions): LoggerInterface {
-    const { logLevel = LoggerLevel.error } = opts;
+    const { verbosity = LoggerVerbosity.off } = opts;
 
     function format(message: any[]) {
         return [`[${new Date().toUTCString()}]`, `(${tag})`, ...message];
     }
 
     return {
-        error: logLevel >= LoggerLevel.error ? (...message) => console.error(...format(message)) : () => {},
-        info: logLevel >= LoggerLevel.info ? (...message) => console.info(...format(message)) : () => {},
-        debug: logLevel >= LoggerLevel.debug ? (...message) => console.debug(...format(message)) : () => {},
-        verbose: logLevel >= LoggerLevel.verbose ? (...message) => console.log(...format(message)) : () => {},
+        error: (...message) => console.error(...format(message)),
+        info: verbosity >= LoggerVerbosity.info ? (...message) => console.info(...format(message)) : () => {},
+        debug: verbosity >= LoggerVerbosity.debug ? (...message) => console.debug(...format(message)) : () => {},
+        verbose: verbosity >= LoggerVerbosity.verbose ? (...message) => console.log(...format(message)) : () => {},
     };
 }
