@@ -19,17 +19,14 @@ export interface LoggerInterface {
 
 export function logger(tag, opts: LoggerOptions): LoggerInterface {
     const { logLevel = LoggerLevel.error } = opts;
-    const methods = {};
 
-    for (const [name, value] of Object.entries(LoggerLevel)) {
-        methods[name] = (...message: any[]) => {
-            if (!value) return;
-
-            if (logLevel >= value) {
-                const formattedMessage = [`[${new Date().toUTCString()}]`, `(${tag})`, ...message];
-                console?.[name] ? console[name](...formattedMessage) : console.log(...formattedMessage);
-            }
-        };
+    function format(message: any[]) {
+        return [`[${new Date().toUTCString()}]`, `(${tag})`, ...message];
     }
-    return <LoggerInterface>methods;
+    return {
+        error: logLevel >= LoggerLevel.error ? (...message) => console.error(...format(message)) : () => {},
+        info: logLevel >= LoggerLevel.info ? (...message) => console.info(...format(message)) : () => {},
+        debug: logLevel >= LoggerLevel.debug ? (...message) => console.debug(...format(message)) : () => {},
+        verbose: logLevel >= LoggerLevel.verbose ? (...message) => console.log(...format(message)) : () => {},
+    };
 }
