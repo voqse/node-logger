@@ -23,6 +23,7 @@ export function logger(tag, opts: LoggerOptions): LoggerInterface {
     function format(message: any[]) {
         return [`[${new Date().toUTCString()}]`, `(${tag})`, ...message];
     }
+
     return {
         error: logLevel >= LoggerLevel.error ? (...message) => console.error(...format(message)) : () => {},
         info: logLevel >= LoggerLevel.info ? (...message) => console.info(...format(message)) : () => {},
